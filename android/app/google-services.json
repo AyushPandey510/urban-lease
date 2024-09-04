@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "140189375948",
+    "project_id": "ap-urban-lease",
+    "storage_bucket": "ap-urban-lease.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140189375948:android:2e6bcd51f3a01ccd369169",
+        "android_client_info": {
+          "package_name": "com.urbanlease"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVb7FjzuRQSrAYqzeOns_-RGhfAPs1DVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
