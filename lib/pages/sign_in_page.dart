@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:urban_lease/constants/colors/app_colors.dart';
 import 'package:urban_lease/constants/widgets/custom_text_field.dart';
+import 'package:urban_lease/pages/forgot_password_page.dart';
 import 'package:urban_lease/pages/sign_up_page.dart';
 import 'package:urban_lease/provider/urban_lease_provider.dart';
 
@@ -16,19 +17,19 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   late TextEditingController _email;
-  late TextEditingController _password;
+  late TextEditingController _passwaord;
 
   @override
   void initState() {
     _email = TextEditingController();
-    _password = TextEditingController();
+    _passwaord = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     _email.dispose();
-    _password.dispose();
+    _passwaord.dispose();
     super.dispose();
   }
 
@@ -78,15 +79,39 @@ class _SignInPageState extends State<SignInPage> {
                 ),
 
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 // Password Text Field
                 CustomTextField(
-                  email: _password,
+                  email: _passwaord,
                   hintText: 'Enter your password here',
                   icon: Icons.lock_rounded,
                   obscureText: true,
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+
+                // Forgot Passowrd
+                SizedBox(
+                  width: double.infinity,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordPage(),
+                      ),
+                    ),
+                    child: const Text(
+                      'Forgot Password ?',
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        color: AppColors.accentColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
 
                 const SizedBox(
@@ -109,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     onPressed: () => value.signIn(
                       _email.text.trim(),
-                      _password.text.trim(),
+                      _passwaord.text.trim(),
                       context,
                     ),
                   ),
@@ -140,6 +165,7 @@ class _SignInPageState extends State<SignInPage> {
                         style: TextStyle(
                           fontSize: 18,
                           color: AppColors.accentColor,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),

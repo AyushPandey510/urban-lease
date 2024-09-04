@@ -24,9 +24,9 @@ class UrbanLeaseProvider extends ChangeNotifier {
           password: password,
         );
         Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
       } on FirebaseAuthException catch (e) {
         if (e.code == 'email-already-in-use') {
           showDialogBox(
@@ -63,6 +63,8 @@ class UrbanLeaseProvider extends ChangeNotifier {
       String email, String password, BuildContext context) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomePage()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showDialogBox(
@@ -81,6 +83,18 @@ class UrbanLeaseProvider extends ChangeNotifier {
           context,
           'Invalid Password',
           'The password entered is invalid.',
+        );
+      } else if (e.code == 'invalid-credential') {
+        showDialogBox(
+          context,
+          'Incorrect email id or password',
+          'The enterd credentials is incorrect.',
+        );
+      } else {
+        showDialogBox(
+          context,
+          'Error',
+          e.toString(),
         );
       }
     } catch (e) {
@@ -111,8 +125,25 @@ class UrbanLeaseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Forgot Password
+  Future<void> forgotPassword(BuildContext context, String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      showDialogBox(
+        context,
+        'Check your email',
+        'Password reset link has been sent to your email.',
+        true,
+        'Ok',
+      );
+    } catch (e) {
+      showDialogBox(context, 'Exception', e.toString());
+    }
+  }
+
   // Template Cupertino Dialog Box for prompts.
-  void showDialogBox(BuildContext context, String title, String content) {
+  void showDialogBox(BuildContext context, String title, String content,
+      [bool flag = false, String buttonText = 'Try Again']) {
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(
@@ -125,8 +156,11 @@ class UrbanLeaseProvider extends ChangeNotifier {
         content: Text(content),
         actions: [
           CupertinoButton(
-            child: const Text('Try Again'),
-            onPressed: () => Navigator.pop(context),
+            child: Text(buttonText),
+            onPressed: () {
+              Navigator.pop(context);
+              if (flag) Navigator.pop(context);
+            },
           ),
         ],
       ),

@@ -5,40 +5,38 @@ import 'package:provider/provider.dart';
 import 'package:urban_lease/constants/colors/app_colors.dart';
 import 'package:urban_lease/constants/widgets/custom_text_field.dart';
 import 'package:urban_lease/pages/sign_in_page.dart';
+import 'package:urban_lease/pages/sign_up_page.dart';
 import 'package:urban_lease/provider/urban_lease_provider.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   late TextEditingController _email;
-  late TextEditingController _password;
-  late TextEditingController _confirmPassword;
+  late TextEditingController _passwaord;
 
   @override
   void initState() {
     _email = TextEditingController();
-    _password = TextEditingController();
-    _confirmPassword = TextEditingController();
+    _passwaord = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     _email.dispose();
-    _password.dispose();
-    _confirmPassword.dispose();
+    _passwaord.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UrbanLeaseProvider>(
-      builder: (context, provider, child) {
+      builder: (context, value, child) {
         return Scaffold(
           extendBodyBehindAppBar: true,
           extendBody: true,
@@ -50,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 // Head Icon / Image
                 const Icon(
-                  FontAwesomeIcons.houseUser,
+                  FontAwesomeIcons.userSecret,
                   size: 80,
                   color: AppColors.accentColor,
                 ),
@@ -58,10 +56,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(
                   height: 30,
                 ),
-
                 // Title
                 const Text(
-                  'Sign Up',
+                  'Reset Password',
                   style: TextStyle(
                     fontSize: 42,
                     fontWeight: FontWeight.bold,
@@ -82,40 +79,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
 
                 const SizedBox(
-                  height: 10,
-                ),
-
-                // Password Text Field
-                CustomTextField(
-                  email: _password,
-                  hintText: 'Enter your password here',
-                  icon: Icons.lock_rounded,
-                  obscureText: true,
-                ),
-
-                const SizedBox(
-                  height: 10,
-                ),
-
-                // Confrim Password Text Field
-                CustomTextField(
-                  email: _confirmPassword,
-                  hintText: 'Re-enter your password here',
-                  icon: Icons.lock_rounded,
-                  obscureText: true,
-                ),
-
-                const SizedBox(
                   height: 20,
                 ),
 
-                // Sign Up Button
+                // Sign In Button
                 SizedBox(
                   width: double.infinity,
                   child: CupertinoButton(
                     color: AppColors.accentColor,
                     child: const Text(
-                      'Sign Up',
+                      'Reset Password',
                       style: TextStyle(
                         letterSpacing: 1.1,
                         color: Colors.black,
@@ -123,14 +96,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         fontSize: 22,
                       ),
                     ),
-                    onPressed: () async {
-                      await provider.signUp(
-                        _email.text.trim(),
-                        _password.text.trim(),
-                        _confirmPassword.text.trim(),
-                        context,
-                      );
-                    },
+                    onPressed: () => value.forgotPassword(
+                      context,
+                      _email.text.trim(),
+                    ),
                   ),
                 ),
 
@@ -138,12 +107,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20,
                 ),
 
-                // Navigation to sign in page.
+                // Navigation to sign up page.
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Already a member ? ',
+                      'Back to Sign In Page ? ',
                       style: TextStyle(
                         fontSize: 18,
                       ),

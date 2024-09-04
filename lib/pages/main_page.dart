@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:urban_lease/pages/home_page.dart';
@@ -9,19 +10,26 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<UrbanLeaseProvider>(context);
-    return StreamBuilder(
-      stream: provider.auth.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return const HomePage();
-        } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return const SignInPage();
-        }
+    return Consumer<UrbanLeaseProvider>(
+      builder: (context, provider, child) {
+        return StreamBuilder<User?>(
+          stream: provider.auth.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasData) {
+              return const HomePage();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              return const SignInPage();
+            }
+          },
+        );
       },
     );
   }
