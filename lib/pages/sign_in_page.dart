@@ -42,136 +42,141 @@ class _SignInPageState extends State<SignInPage> {
           extendBody: true,
           body: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Head Icon / Image
-                const Icon(
-                  FontAwesomeIcons.houseUser,
-                  size: 80,
-                  color: AppColors.accentColor,
-                ),
-
-                const SizedBox(
-                  height: 30,
-                ),
-                // Title
-                const Text(
-                  'Sign In',
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white38,
-                  ),
-                ),
-
-                const SizedBox(
-                  height: 30,
-                ),
-
-                // Email Text Field
-                CustomTextField(
-                  email: _email,
-                  hintText: 'Enter your email here',
-                  icon: Icons.email_rounded,
-                  obscureText: false,
-                ),
-
-                const SizedBox(
-                  height: 10,
-                ),
-
-                // Password Text Field
-                CustomTextField(
-                  email: _passwaord,
-                  hintText: 'Enter your password here',
-                  icon: Icons.lock_rounded,
-                  obscureText: true,
-                ),
-
-                const SizedBox(
-                  height: 10,
-                ),
-
-                // Forgot Passowrd
-                SizedBox(
-                  width: double.infinity,
-                  child: GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const ForgotPasswordPage(),
-                      ),
+            child: SingleChildScrollView(
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Head Icon / Image
+                    const Icon(
+                      FontAwesomeIcons.houseUser,
+                      size: 80,
+                      color: AppColors.accentColor,
                     ),
-                    child: const Text(
-                      'Forgot Password ?',
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                        color: AppColors.accentColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+
+                    const SizedBox(
+                      height: 30,
                     ),
-                  ),
-                ),
-
-                const SizedBox(
-                  height: 20,
-                ),
-
-                // Sign In Button
-                SizedBox(
-                  width: double.infinity,
-                  child: CupertinoButton(
-                    color: AppColors.accentColor,
-                    child: const Text(
+                    // Title
+                    const Text(
                       'Sign In',
                       style: TextStyle(
-                        letterSpacing: 1.1,
-                        color: Colors.black,
+                        fontSize: 42,
                         fontWeight: FontWeight.bold,
-                        fontSize: 22,
+                        color: Colors.white38,
                       ),
                     ),
-                    onPressed: () => value.signIn(
-                      _email.text.trim(),
-                      _passwaord.text.trim(),
-                      context,
-                    ),
-                  ),
-                ),
 
-                const SizedBox(
-                  height: 20,
-                ),
-
-                // Navigation to sign up page.
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'New to the platform ? ',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                    const SizedBox(
+                      height: 30,
                     ),
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
+
+                    // Email Text Field
+                    CustomTextField(
+                      email: _email,
+                      hintText: 'Enter your email here',
+                      icon: Icons.email_rounded,
+                      obscureText: false,
+                    ),
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                    // Password Text Field
+                    CustomTextField(
+                      email: _passwaord,
+                      hintText: 'Enter your password here',
+                      icon: Icons.lock_rounded,
+                      obscureText: true,
+                    ),
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                    // Forgot Passowrd
+                    SizedBox(
+                      width: double.infinity,
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordPage(),
+                          ),
+                        ),
+                        child: const Text(
+                          'Forgot Password ?',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            color: AppColors.accentColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: AppColors.accentColor,
-                          fontWeight: FontWeight.bold,
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    // Sign In Button
+                    SizedBox(
+                      width: double.infinity,
+                      child: CupertinoButton(
+                        color: AppColors.accentColor,
+                        child: const Text(
+                          'Sign In',
+                          style: TextStyle(
+                            letterSpacing: 1.1,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+                        onPressed: () => value.signIn(
+                          _email.text.trim(),
+                          _passwaord.text.trim(),
+                          context,
                         ),
                       ),
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    // Navigation to sign up page.
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'New to the platform ? ',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpPage(),
+                            ),
+                          ),
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: AppColors.accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         );

@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:urban_lease/categories.dart';
 import 'package:urban_lease/constants/colors/app_colors.dart';
-import 'package:urban_lease/constants/widgets/custom_tile.dart';
 import 'package:urban_lease/provider/urban_lease_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   late final PageController _pageController;
   late final Timer _timer;
 
